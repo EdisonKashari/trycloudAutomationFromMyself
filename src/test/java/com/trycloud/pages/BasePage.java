@@ -1,11 +1,14 @@
 package com.trycloud.pages;
 
 import com.trycloud.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class BasePage {
+import java.util.List;
+
+public  class BasePage {
 
     public BasePage(){
         PageFactory.initElements(Driver.getDriver(),this);
@@ -23,4 +26,19 @@ public abstract class BasePage {
 
     @FindBy(xpath = "(//span[normalize-space(text()) = 'Dashboard'])[1]")
     public WebElement dashboard;
+
+    @FindBy(xpath = "//p[@class='warning wrongPasswordMsg']")
+    public WebElement error_message;
+
+    @FindBy(xpath = "//ul[@id='appmenu']//li[@data-id]/a")
+    public List<WebElement> all_Modules;
+
+
+
+    public void clickFileModule(String file){
+      String locator = " (//a[@aria-label='"+file+"'])[1]";
+
+      WebElement element = Driver.getDriver().findElement(By.xpath(locator));
+      element.click();
+    }
 }
